@@ -1,8 +1,11 @@
 import React,{Component}  from 'react'
 import './Quiz.css'
 import ActiveQuiz from './ActiveQuiz/ActiveQuiz'
+import FinishedQuiz from './FinishedQuiz/FinishedQuiz'
 class Quiz extends Component {
 state ={
+  results:0,
+  isFinished:false,
   activeQuestion:0,
   answerState:null,
  
@@ -31,17 +34,36 @@ state ={
 {text:"Би-2 - Лайки",id:4}
   ]
 }
+,{
+  question:'По тёмным улицам летит ночной дозор',
+  rightAnswerId:1,
+  id:3,
+  answers:[
+{text:"Uma2rman - Ночной дозор ",id:1},
+{text:"Ночь Самайна - Дозор",id:2},
+{text:"Чердакъ feat. Nagart - Последний дозор",id:3},
+{text:"Ден Назгул-Бес",id:4}
+  ]
+}
   ]
 
 
 }
-
+onRetry =() =>  {
+this.setState({
+  activeQuestion:0,
+  answerState:null,
+  isFinished:false,
+  results:0
+})
+}
 onAnswerClick =answerId => {
 const question=this.state.quiz[this.state.activeQuestion]
 if (question.rightAnswerId === answerId){
 
 this.setState({
-  answerState:{[answerId]:'sucess'}
+  answerState:{[answerId]:'sucess'},
+  results:this.state.results+1
 })
 }else {
   this.setState({
@@ -52,7 +74,11 @@ this.setState({
 
 const timeout=window.setTimeout(() => {
   if (this.isQuiz()){
-    console.log("finished")
+    this.setState({
+      isFinished:true,
+
+
+    })
   }else{
       this.setState({
       activeQuestion:this.state.activeQuestion+1,
@@ -63,7 +89,7 @@ const timeout=window.setTimeout(() => {
 
 
 window.clearTimeout(timeout)
-},200)
+},700)
 
 
 }
@@ -80,7 +106,15 @@ render() {
 
 <div className='QuizWrapper'>
 <h1>{this.state.quizName}</h1>
-<ActiveQuiz 
+{
+  this.state.isFinished
+   ? <FinishedQuiz
+   results={this.state.results}
+   quizLength={this.state.quiz.length}
+   onRetry={this.onRetry}
+
+   />
+   : <ActiveQuiz 
 answers={this.state.quiz[this.state.activeQuestion].answers} 
 question={this.state.quiz[this.state.activeQuestion].question}
 onAnswerClick={this.onAnswerClick}
@@ -88,6 +122,8 @@ quizLength={this.state.quiz.length}
 AnswerNumber={this.state.activeQuestion+1}
 state={this.state.answerState}
 />
+}
+
 </div>
 
 </div>
