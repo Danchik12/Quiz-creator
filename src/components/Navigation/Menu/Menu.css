@@ -1,0 +1,41 @@
+.Menu{
+	position: fixed;
+	top: 40px;
+	left: 40px;
+	font-size: 30px;
+	cursor: pointer;
+	color: #fff;
+	z-index: 100;
+	transition: opacity .22s  ease-in;
+
+
+	
+	
+	
+	
+
+}
+
+@keyframes left-change {
+    0% {
+        left: 40px;
+    }
+    100% {
+        left: 320px;
+    }
+}
+
+
+
+.Menu:hover{
+	opacity: .4;
+
+}
+
+.Menu.open{
+
+            
+	animation: left-change .22s ease-in;
+	left: 320px;
+	font-size: 30px;
+}
