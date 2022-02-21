@@ -1,0 +1,31 @@
+.QuizList{
+	display: flex;
+	justify-content: center;
+	padding-top: 100px;
+	flex-grow: 1;
+	width: 100%;
+
+
+}
+
+.QuizList ul {
+	
+
+	
+	list-style: none;
+	bottom: 0;
+
+}
+
+
+
+.QuizList  a {
+	text-decoration: none;
+	color: #fff;
+	
+}
+.QuizList  a:hover {
+	
+	color: #363f54;
+	
+}
