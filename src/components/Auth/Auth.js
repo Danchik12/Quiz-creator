@@ -1,6 +1,6 @@
 import './Auth.css'
 import React,{Component} from 'react'
-import {RiLockPasswordLine} from "react-icons/ri"
+import {GoEyeClosed,GoEye} from "react-icons/go"
 import Button from './../UI/Button/Button';
 export default class Auth extends Component{
 	state ={
@@ -47,10 +47,12 @@ render (){
       <div className='pass'>
       <input  type="password" id='password-input' required />
       
-      { this.state.close ?
-      <RiLockPasswordLine className='control' onClick={this.show_hide_password}/> :
-      <RiLockPasswordLine className='no' onClick={this.show_hide_password} />
-   }
+       
+      { this.state.close ? 
+      	<GoEye className='control' onClick={this.show_hide_password }/>: 
+      	<GoEyeClosed className='control' onClick={this.show_hide_password }/> }
+       
+   
     </div>
       
       <Button type="sucess" onClick={this.loginHandler}>Войти</Button>

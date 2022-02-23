@@ -42,19 +42,13 @@
 	margin-top: 15px;
 }
 
-.AuthForm .no{
-	cursor: pointer;
-	display: flex;
-	margin-top: 5px;
 
-
-
-}
 .AuthForm .control{
 	cursor: pointer;
 	display: flex;
-	color: #000;
+	
 	margin-top: 5px;
+	margin-left: 5px;
 }
 .AuthForm .pass{
 	display: flex;
