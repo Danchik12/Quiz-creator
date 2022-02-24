@@ -8,7 +8,8 @@ state ={
   isFinished:false,
   activeQuestion:0,
   answerState:null,
- 
+  image:false,
+  
   quizName:"Угадай песню по строчке ?",
   
   quiz:[
@@ -17,6 +18,7 @@ state ={
   question:'Будь как дома, путник',
   rightAnswerId:3,
   id:1,
+  imageLink:'',
   answers:[
 {text:"Би-2 - Полковнику не кто не пишет",id:1},
 {text:"Nagart - Трактирщик",id:2},
@@ -28,6 +30,7 @@ state ={
   question:'Темноты боятся скелеты в шкафу',
   rightAnswerId:4,
   id:2,
+  imageLink:'',
   answers:[
 {text:"Ария - Химера",id:1},
 {text:"Крематорий - Скелеты в шкафу",id:2},
@@ -39,6 +42,7 @@ state ={
   question:'По тёмным улицам летит ночной дозор',
   rightAnswerId:1,
   id:3,
+  imageLink:'',
   answers:[
 {text:"Uma2rman - Ночной дозор ",id:1},
 {text:"Ночь Самайна - Дозор",id:2},
@@ -50,6 +54,7 @@ state ={
   question:'Мы залетим на карнавал',
   rightAnswerId:1,
   id:4,
+  imageLink:'',
   answers:[
 {text:"Galibri & Mavik - Карнавал ",id:1},
 {text:"Nagart - Карнавал",id:2},
@@ -61,6 +66,7 @@ state ={
   question:'А мы, любим Рок-н-Ролл, кедами примочку в пол.',
   rightAnswerId:2,
   id:5,
+  imageLink:'',
   answers:[
 {text:"Би-2 — Мой рок-н-ролл",id:1},
 {text:"Trubetskoy - Рок-н-ролл",id:2},
@@ -72,6 +78,7 @@ state ={
   question:'Горгород, Горгород — дом, но капкан.',
   rightAnswerId:3,
   id:6,
+  imageLink:'',
   answers:[
 {text:"Oxxxymiron — Горсвет",id:1},
 {text:"Oxxxymiron - Где нас нет",id:2},
@@ -156,6 +163,8 @@ question={this.state.quiz[this.state.activeQuestion].question}
 onAnswerClick={this.onAnswerClick}
 quizLength={this.state.quiz.length}
 AnswerNumber={this.state.activeQuestion+1}
+image={this.state.image}
+imageLink={this.state.quiz.imageLink}
 state={this.state.answerState}
 />
 }

@@ -5,12 +5,18 @@ import AnswersList from './../AnswersList/AnswersList'
 const ActiveQuiz = props => {
 	return (
 <div className="ActiveQuiz	">
-<p className='Question' ><span>
+<p className='Question' >
+<span>
 <strong> {props.AnswerNumber}. </strong>&nbsp;
 {props.question}
 </span>
 <small >{props.AnswerNumber} из {props.quizLength} </small>
 </p>
+
+{ props.image ?
+<img src={props.imageLink} alt="Изображение"/>:
+<span></span>
+}
 
 <AnswersList
 state={props.state} 
