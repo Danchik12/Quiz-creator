@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 export default function QuizCard ({quizName,id}) {
 	
 		return(
-<Link to={'/quiz/'+Number(id+1)}>
+<Link to={'/quiz/'+id}>
 
 <li className="QuizCard" ><div >Тест: {quizName}
 

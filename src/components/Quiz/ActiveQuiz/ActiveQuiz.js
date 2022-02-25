@@ -13,10 +13,6 @@ const ActiveQuiz = props => {
 <small >{props.AnswerNumber} из {props.quizLength} </small>
 </p>
 
-{ props.image ?
-<img src={props.imageLink} alt="Изображение"/>:
-<span></span>
-}
 
 <AnswersList
 state={props.state} 

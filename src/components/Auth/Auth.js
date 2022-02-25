@@ -40,11 +40,13 @@ render (){
 <div><h1>Авторизация</h1>
 
 <form onSubmit={this.submitHand} className="AuthForm">
-     <label for="login">Login</label>
+
+     <label  htmlFor="login">Login</label>
       <input  type="text" id='login' required/>
       
-      <label for="password-input">Password</label>
+      <label  htmlFor="password-input">Password</label>
       <div className='pass'>
+
       <input  type="password" id='password-input' required />
       
        
