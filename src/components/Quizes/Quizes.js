@@ -2,9 +2,11 @@ import './Quizes.css'
 import React,{Component} from 'react'
 import axios from 'axios'
 import QuizCard from './QuizCard/QuizCard'
+import Loader from './../UI/Loader/Loader'
 export default class Quizes extends Component{
 	state ={
-		quizes:[]
+		quizes:[],
+		loading:true
 	}
 	renderQuizes(){
 	return this.state.quizes.map((quiz,index) => {
@@ -29,7 +31,8 @@ export default class Quizes extends Component{
 
  	}
  	this.setState({
- 		quizes:quizes
+ 		quizes:quizes,
+ 		loading:false
  	})
  }catch(e){
  	console.log(e)
@@ -44,10 +47,16 @@ export default class Quizes extends Component{
 
 <div>
 <h1>Тесты</h1>
+{this.state.loading ? 
+<Loader /> :
+
 <ul>
 {this.renderQuizes()}
 
 </ul>
+
+}
+
 </div>
 </div>
 

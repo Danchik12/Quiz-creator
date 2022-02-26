@@ -14,7 +14,7 @@ function App() {
  <Routes>
       <Route path='/' element={<Quizes/>}/>
       <Route path='/auth' element={<Auth/>}/>
-      <Route path='/quiz/:id' element={<Quiz/>}/>
+      <Route exact path='/quiz/:id'  element={<Quiz/>}/>
       <Route path='/create-quiz' element={<QuizCreator/>}/>
         </Routes>
       

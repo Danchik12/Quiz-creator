@@ -7,8 +7,8 @@ export default class QuizCreator extends Component{
 	state ={
 		
 		quiz:[],
-		rightAnswerId:1,
-		quizName:""
+		quizName:"",
+		rightAnswerId:1
 	}
 	SelectChange = event =>{
 		this.setState({
@@ -43,15 +43,20 @@ export default class QuizCreator extends Component{
 				this.setState({
 					quiz,
 				})
-				document.getElementById('QuizName').value=''
+				
 				document.getElementById('question').value=''
 				document.getElementById('1').value=''
 				document.getElementById('2').value=''
 				document.getElementById('3').value=''
 				document.getElementById('4').value=''
 	}
+
+
+	
 	CreateQuiz = async event =>{
 event.preventDefault()
+document.getElementById('QuizName').value=''
+
 try{
  await axios.post('https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes.json',this.state)
 this.setState({

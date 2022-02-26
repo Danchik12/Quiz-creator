@@ -41,8 +41,8 @@ render (){
 
 <form onSubmit={this.submitHand} className="AuthForm">
 
-     <label  htmlFor="login">Login</label>
-      <input  type="text" id='login' required/>
+     <label  htmlFor="email">Email</label>
+      <input  type='email' id='email' required/>
       
       <label  htmlFor="password-input">Password</label>
       <div className='pass'>
