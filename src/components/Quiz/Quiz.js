@@ -2,10 +2,10 @@ import React,{Component}  from 'react'
 import './Quiz.css'
 import ActiveQuiz from './ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from './FinishedQuiz/FinishedQuiz'
-import axios from 'axios'
 import Loader from './../UI/Loader/Loader'
 import {useParams} from "react-router-dom";
-
+import {connect } from 'react-redux'
+import {fetchQuizByID,quizAnswerClick,RetryQuiz} from './../../store/action/quiz'
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     
@@ -21,84 +21,18 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 class Quiz extends Component {
-state ={
-  results:0,
-  isFinished:false,
-  activeQuestion:0,
-  answerState:null,
-  quizName:" ",
-  quiz:[],
-  loading:true,
 
-
-}
  
 
-onRetry =() =>  {
-this.setState({
-  activeQuestion:0,
-  answerState:null,
-  isFinished:false,
-  results:0
-})
-}
-onAnswerClick =answerId => {
-const question=this.state.quiz[this.state.activeQuestion]
-if (question.rightAnswerId === answerId){
 
-this.setState({
-  answerState:{[answerId]:'sucess'},
-  results:this.state.results+1
-})
-}else {
-  this.setState({
-  answerState:{[answerId]:'error'}
-})
-
+ 
+componentDidMount (){
+  this.props.fetchQuizByID(this.props.router.params.id)
 }
 
-const timeout=window.setTimeout(() => {
-  if (this.isQuiz()){
-    this.setState({
-      isFinished:true,
-
-
-    })
-  }else{
-      this.setState({
-      activeQuestion:this.state.activeQuestion+1,
-      answerState:null
-      }
-        )
-  }
-
-
-window.clearTimeout(timeout)
-},300)
-
-
+componentWillUnmount(){
+  this.props.RetryQuiz()
 }
-
- isQuiz (){
-  return this.state.activeQuestion+1 === this.state.quiz.length
-}
-async componentDidMount (){
-  
-  try{
-
-  const response = await axios.get(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${this.props.router.params.id}.json`)
-  const quiz=response.data.quiz
-  const quizName=response.data.quizName 
-  this.setState({
-  quiz:quiz,
-  quizName:quizName,
-  loading:false
-}) 
-}catch(e){
-  console.log(e)
-}
-}
-
 
 render() {
   return(
@@ -106,31 +40,25 @@ render() {
 
 
 <div className='QuizWrapper'>
-<h1>{this.state.quizName}</h1>
-{this.state.loading 
+<h1>{this.props.quizName}</h1>
+{this.props.loading || !this.props.quiz 
 ? <Loader /> :  
 
-  this.state.isFinished
+  this.props.isFinished
    ? <FinishedQuiz
-   results={this.state.results}
-   quizLength={this.state.quiz.length}
-   onRetry={this.onRetry}
+   results={this.props.results}
+   quizLength={this.props.quiz.length}
+   onRetry={this.props.RetryQuiz}
 
    />
    : <ActiveQuiz 
-answers={this.state.quiz[this.state.activeQuestion].answers} 
-question={this.state.quiz[this.state.activeQuestion].question}
-onAnswerClick={this.onAnswerClick}
-quizLength={this.state.quiz.length}
-AnswerNumber={this.state.activeQuestion+1}
-
-state={this.state.answerState}
+answers={this.props.quiz[this.props.activeQuestion].answers} 
+question={this.props.quiz[this.props.activeQuestion].question}
+onAnswerClick={this.props.quizAnswerClick}
+quizLength={this.props.quiz.length}
+AnswerNumber={this.props.activeQuestion+1}
+state={this.props.answerState}
 />
-
-
-
-
-
 }
 
 
@@ -143,5 +71,25 @@ state={this.state.answerState}
 }
 
 
+function mapStateToProps(state){
+  return {
+results:state.quiz.results,
+isFinished:state.quiz.isFinished,
+activeQuestion:state.quiz.activeQuestion,
+answerState:state.quiz.answerState,
+quizName:state.quiz.quizName,
+quiz:state.quiz.quiz,
+loading:state.quiz.loading
+  }
+}
 
-export default withRouter(Quiz)
+function mapDispathToProps(dispatch){
+  return {
+    fetchQuizByID:id => dispatch(fetchQuizByID(id)),
+    quizAnswerClick:answerId =>dispatch(quizAnswerClick(answerId)),
+    RetryQuiz:() => dispatch (RetryQuiz())
+  }
+}
+
+
+export default connect (mapStateToProps,mapDispathToProps) (withRouter(Quiz))

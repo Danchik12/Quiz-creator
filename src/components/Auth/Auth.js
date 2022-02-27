@@ -2,16 +2,41 @@ import './Auth.css'
 import React,{Component} from 'react'
 import {GoEyeClosed,GoEye} from "react-icons/go"
 import Button from './../UI/Button/Button';
+import axios from 'axios'
 export default class Auth extends Component{
 	state ={
 		close:false
 	}
-loginHandler=()=>{
+loginHandler= async ()=>{
+	const authData={
+	email:document.getElementById('email').value,
+	password:document.getElementById('password-input').value,
+	returnSecureToken:true
+}
+try{	
+
+const response =await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD8U07p1wdLi2yhRMVF2fgLNMGTYYAZEnU',authData)
+console.log(response.data)
+}catch(e){
+	console.log(e)
+}
 
 }
-registerHandler =()=>{
-
+registerHandler = async ()=>{
+const authData={
+	email:document.getElementById('email').value,
+	password:document.getElementById('password-input').value,
+	returnSecureToken:true
 }
+try{	
+
+const response =await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD8U07p1wdLi2yhRMVF2fgLNMGTYYAZEnU',authData)
+console.log(response.data)
+}catch(e){
+	console.log(e)
+}
+}
+
 submitHand =event =>{
 event.preventDefault()
 }

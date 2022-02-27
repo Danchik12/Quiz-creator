@@ -1,43 +1,20 @@
 import './Quizes.css'
 import React,{Component} from 'react'
-import axios from 'axios'
 import QuizCard from './QuizCard/QuizCard'
 import Loader from './../UI/Loader/Loader'
-export default class Quizes extends Component{
-	state ={
-		quizes:[],
-		loading:true
-	}
-	renderQuizes(){
-	return this.state.quizes.map((quiz,index) => {
+import {connect } from 'react-redux'
+import {fetchQuizes} from './../../store/action/quiz'
+ class Quizes extends Component{
+renderQuizes(){
+	return this.props.quizes.map((quiz,index) => {
 	return(
 	<QuizCard quizName={quiz.name} id={quiz.id}  key={index}/>
 	)
 })
 }
- async componentDidMount(){
- 	try{
- 	const response = await axios.get('https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes.json')
- 	const quizes=[]
- 	
-
- for (const [key,value] of Object.entries(response.data)) {
- 		
- 		quizes.push({
- 			id:key,
- 		name:`${value.quizName}`
- 		})
- 		
-
+componentDidMount(){
+	this.props.fetchQuizes()
  	}
- 	this.setState({
- 		quizes:quizes,
- 		loading:false
- 	})
- }catch(e){
- 	console.log(e)
- }
-}
 
 
 	render(){
@@ -47,7 +24,7 @@ export default class Quizes extends Component{
 
 <div>
 <h1>Тесты</h1>
-{this.state.loading ? 
+{this.props.loading  && this.props.quizes.length !== 0 ?
 <Loader /> :
 
 <ul>
@@ -64,3 +41,15 @@ export default class Quizes extends Component{
 			)
 	}
 }
+function mapStateToProps(state){
+return {
+	quizes:state.quiz.quizes,
+	loading:state.quiz.loading
+}
+}
+function mapDispatchToProps(dispatch){
+return {
+fetchQuizes:() => dispatch(fetchQuizes())
+}
+}
+export default connect (mapStateToProps,mapDispatchToProps) (Quizes)
