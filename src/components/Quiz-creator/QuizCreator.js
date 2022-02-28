@@ -1,13 +1,12 @@
 import './QuizCreator.css'
 import React,{Component} from 'react'
-import axios from 'axios'
+
 import Button from './../UI/Button/Button';
 import Select from './../UI/Select/Select';
-export default class QuizCreator extends Component{
+import {connect } from 'react-redux'
+import {createQuiz,addQuizQuestion} from './../../store/action/create'
+ class QuizCreator extends Component{
 	state ={
-		
-		quiz:[],
-		quizName:"",
 		rightAnswerId:1
 	}
 	SelectChange = event =>{
@@ -23,14 +22,14 @@ export default class QuizCreator extends Component{
 	}
 	addQuestion =event =>{
 		event.preventDefault()
-		const quiz=this.state.quiz.concat()
-		const index=quiz.length+1
-		this.setState({
-			quizName:document.getElementById('QuizName').value
-		})
+		
+		
+		
+			const quizName =document.getElementById('QuizName').value
+		
 		const questionItem={
 			question:document.getElementById('question').value,
-			id:index,
+			id:this.props.quiz.length+1,
 			rightAnswerId:this.state.rightAnswerId,
 			answers:[
 			{text:document.getElementById('1').value,id:1},
@@ -39,10 +38,8 @@ export default class QuizCreator extends Component{
 			{text:document.getElementById('4').value,id:4}
 			]
 				}
-				quiz.push(questionItem)
-				this.setState({
-					quiz,
-				})
+				this.props.addQuizQuestion(questionItem,quizName)
+				
 				
 				document.getElementById('question').value=''
 				document.getElementById('1').value=''
@@ -53,20 +50,16 @@ export default class QuizCreator extends Component{
 
 
 	
-	CreateQuiz = async event =>{
+	CreateQuiz =  event =>{
 event.preventDefault()
+
+this.props.createQuiz()
+document.getElementById('question').value=''
+				document.getElementById('1').value=''
+				document.getElementById('2').value=''
+				document.getElementById('3').value=''
+				document.getElementById('4').value=''
 document.getElementById('QuizName').value=''
-
-try{
- await axios.post('https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes.json',this.state)
-this.setState({
-	quiz:[],
-		quizName:""
-})
-
-}catch(e){
-	console.log(e)
-}
 
 	}
 
@@ -81,7 +74,7 @@ this.setState({
 <label  htmlFor='QuizName'>Название теста</label>
 <input id='QuizName' type="text" />
 <label  htmlFor='question'>Название Вопроса</label>
-<input id='question'type="text" />
+<input id='question' type="text" />
 
 
 
@@ -119,7 +112,7 @@ onClick={this.addQuestion}
 <Button
 type='sucess'
 onClick={this.CreateQuiz}
-disabled={this.state.quiz.length === 0}
+disabled={this.props.quiz.length === 0}
 
 >Создать тест</Button>
 
@@ -140,3 +133,18 @@ disabled={this.state.quiz.length === 0}
 			)
 	}
 }
+
+function mapStateToProps (state){
+	return {
+		quiz:state.create.quiz,
+		quizName:state.create.quizName
+	}
+}
+function mapDispatchToProps (dispatch){
+	return {
+		addQuizQuestion: (item,quizName) => dispatch(addQuizQuestion(item,quizName)),
+		createQuiz:() => dispatch(createQuiz())
+	}
+}
+
+export default connect (mapStateToProps,mapDispatchToProps) (QuizCreator)
