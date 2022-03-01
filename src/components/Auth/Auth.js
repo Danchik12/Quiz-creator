@@ -1,40 +1,27 @@
 import './Auth.css'
 import React,{Component} from 'react'
+import {connect } from 'react-redux'
 import {GoEyeClosed,GoEye} from "react-icons/go"
 import Button from './../UI/Button/Button';
-import axios from 'axios'
-export default class Auth extends Component{
+import {auth} from './../../store/action/auth'
+ class Auth extends Component{
 	state ={
 		close:false
 	}
-loginHandler= async ()=>{
-	const authData={
-	email:document.getElementById('email').value,
-	password:document.getElementById('password-input').value,
-	returnSecureToken:true
-}
-try{	
+loginHandler=  ()=>{
+	this.props.auth(
+		document.getElementById('email').value,
+	document.getElementById('password-input').value,
+true
+	)
+	}
 
-const response =await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD8U07p1wdLi2yhRMVF2fgLNMGTYYAZEnU',authData)
-console.log(response.data)
-}catch(e){
-	console.log(e)
-}
-
-}
-registerHandler = async ()=>{
-const authData={
-	email:document.getElementById('email').value,
-	password:document.getElementById('password-input').value,
-	returnSecureToken:true
-}
-try{	
-
-const response =await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD8U07p1wdLi2yhRMVF2fgLNMGTYYAZEnU',authData)
-console.log(response.data)
-}catch(e){
-	console.log(e)
-}
+registerHandler =  ()=>{
+this.props.auth(
+		document.getElementById('email').value,
+	document.getElementById('password-input').value,
+false
+	)
 }
 
 submitHand =event =>{
@@ -94,3 +81,13 @@ render (){
 			)
 	}
 }
+
+function mapDispathToProps(dispatch){
+	return{
+		auth:(email,password,isLogin) => dispatch (auth(email,password,isLogin)) 
+	}
+}
+
+
+
+export default connect (null,mapDispathToProps) (Auth)
