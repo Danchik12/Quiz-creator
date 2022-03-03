@@ -1,0 +1,21 @@
+.Select {
+	margin-bottom: 15px;
+}
+
+.Select label{
+	margin: 0 0 3px 0;
+	padding: 0px;
+	font-weight: bold;
+	display: block;
+}
+
+
+
+.Select select{
+display: block;
+box-sizing: border-box;
+margin: 0 0 5px;
+hieght: 29px;
+width: 90%;
+outline: none;
+}
