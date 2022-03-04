@@ -6,7 +6,8 @@ import Button from './../UI/Button/Button';
 import {auth} from './../../store/action/auth'
  class Auth extends Component{
 	state ={
-		close:false
+		close:false,
+		check:true
 	}
 loginHandler=  ()=>{
 	this.props.auth(
@@ -46,35 +47,99 @@ event.preventDefault()
 	return false;
 }
 
+CheckOut =() =>{
+	this.setState({
+			check:!this.state.check
+		})
+}
+
+
 render (){
-		return(
-<div className="Auth">
-<div><h1>Авторизация</h1>
+	const login=(
+<>
+<div id='login'>
+<h1>Вход</h1>
+<hr/>
 
-<form onSubmit={this.submitHand} className="AuthForm">
-
+			<p>
      <label  htmlFor="email">Email</label>
       <input  type='email' id='email' required/>
+      </p>
+      
       
       <label  htmlFor="password-input">Password</label>
       <div className='pass'>
-
-      <input  type="password" id='password-input' required />
+			<input  type="password" id='password-input' required />
       
-       
-      { this.state.close ? 
+       { this.state.close ? 
       	<GoEye className='control' onClick={this.show_hide_password }/>: 
       	<GoEyeClosed className='control' onClick={this.show_hide_password }/> }
+
        
-   
-    </div>
       
+      </div>
       <Button type="sucess" onClick={this.loginHandler}>Войти</Button>
-      <Button type="primary" onClick={this.registerHandler}>Зарегистрироваться</Button>
+
+      <p >
+                    Не зарегистрированы еще ?
+                    <a href="#login" onClick={this.CheckOut} >Присоединяйтесь</a>
+                </p>
+
+                </div>
+
+</>
+
+		)
+
+const register =(
+	<>
+<div id='register'>
+                <h1>Регистрация</h1>
+								<hr/>
+								<p>
+     <label  htmlFor="email">Email</label>
+      <input  type='email' id='email' required/>
+      </p>
+      
+      
+      <label  htmlFor="password-input">Password</label>
+      <div className='pass'>
+			<input  type="password" id='password-input' required />
+      
+       { this.state.close ? 
+      	<GoEye className='control' onClick={this.show_hide_password }/>: 
+      	<GoEyeClosed className='control' onClick={this.show_hide_password }/> }
+
+       
+      
+      </div>
+
+								<Button type="primary" onClick={this.registerHandler}>Зарегестрироваться</Button>
+								<p >  
+                 Уже зарегистрированы ?
+                 <a href="#register" onClick={this.CheckOut} > Войдите на сайт </a>
+                 </p>
+
+
+                </div>
+                </>
+)
+
+
+
+		return(
+<div className="Auth">
+<div>
+<form onSubmit={this.submitHand} className="AuthForm">
+{this.state.check ?
+login :
+register}
+
+                
     </form>
-
-
 </div>
+
+
 </div>
 
 
