@@ -1,24 +1,25 @@
 import React from 'react'
 import './ActiveQuiz.css'
 import AnswersList from './../AnswersList/AnswersList'
-import RequestTimer from './../../UI/Timer/timer'
+import Timer from './../../UI/Timer/timer'
 
  
 const ActiveQuiz = props => {
 	return (
 <div className="ActiveQuiz	">
-<p className='Question' >
 
-<div>
+
+<div className='Question'>
 <strong >Задания: {props.AnswerNumber}|{props.quizLength} </strong>
-<RequestTimer
-second='0'
-minutes='15'
+<Timer
+minutes='7'
+seconds='0'
+
 />
 </div>
 
 
-</p>
+
 <div className='Quest'>{props.question}</div>
 
 <AnswersList

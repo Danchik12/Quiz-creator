@@ -44,7 +44,7 @@ render() {
 {this.props.loading || !this.props.quiz 
 ? <Loader /> :  
 
-  this.props.isFinished
+  this.props.isFinished 
    ? <FinishedQuiz
    results={this.props.results}
    quizLength={this.props.quiz.length}
@@ -58,6 +58,7 @@ onAnswerClick={this.props.quizAnswerClick}
 quizLength={this.props.quiz.length}
 AnswerNumber={this.props.activeQuestion+1}
 state={this.props.answerState}
+
 />
 }
 

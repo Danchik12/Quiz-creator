@@ -9,21 +9,16 @@
 
 }
 
-
-.Question{
-	display: flex;
-	justify-content: space-between;
-	
-}
-.Question div {
+.Question {
+	padding: 10px;
 	height: 40px;
 	width: 90%;
-	border: 1px solid rgba(255,255,255,0.1);
-	background-color: rgba(255,255,255,0.1);
+	border: 1px solid rgba(253,255,253,0.1);
+	background-color: rgba(253,255,253,0.1);
 	display: flex;
 	justify-content: space-between;
-	border-radius: 10px;
-	padding: 10px;
+	border-radius: 15px;
+	
 }
 
 

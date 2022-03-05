@@ -5,9 +5,11 @@ import {FETCH_QUIZES_START,
 		  QUIZ_SET_STATE,
 		   FINISH_QUIZ,
 			QUIZ_NEXT,
-			RETRY_QUIZ} from './../action/actionTypes'
+			RETRY_QUIZ,
+		} from './../action/actionTypes'
 
 const inintialState  ={ 
+
 quizes:[],
 loading:false,
 error:null,
@@ -58,12 +60,14 @@ export default function quizReducer(state = inintialState ,action){
 				activeQuestion:action.number
 			}
 		}
+		
 		case RETRY_QUIZ:{
 			return{
 ...state,activeQuestion:0,
   answerState:null,
   isFinished:false,
-  results:0
+  results:0,
+  
 			}
 		}
 

@@ -1,11 +1,14 @@
  import React ,{Component} from 'react'
- 
- class RequestTimer extends Component {
+ import './timer.css'
+
+
+ class Timer extends Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
-            seconds: this.props.second,
+            seconds: this.props.seconds,
             minutes: this.props.minutes
             
         }
@@ -21,7 +24,13 @@
         minute -= 1;
         second = 59
     }
-    
+
+
+    if (this.state.minutes == 0 && this.state.seconds == 0){
+        
+        
+
+    }
         
 
         this.setState({
@@ -32,7 +41,9 @@
     }
 
     componentDidMount() {
+
         this.timer = setInterval(this.getTime, 1000)
+
     }
 
     render() {
@@ -40,11 +51,14 @@
         <>
             
                 
-      <span>{this.state.minutes}m {this.state.seconds % 60}s</span>                
+      <div className='Timer'>
+      {this.state.minutes}:{this.state.seconds % 60}
+      </div>                
             
             </>
         )
     }
 }
 
-export default RequestTimer
+
+export default Timer
