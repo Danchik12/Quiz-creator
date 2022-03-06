@@ -13,6 +13,7 @@ const ActiveQuiz = props => {
 <strong >Задания: {props.AnswerNumber}|{props.quizLength} </strong>
 <Timer
 
+deadtime={420000}
 
 />
 </div>
