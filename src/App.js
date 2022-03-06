@@ -33,7 +33,7 @@ class  App extends Component {
 render (){
   let routes=(
       <Routes>
-      <Route exact path='/' element={<Quizes/>}/>
+      <Route exact path='/Quiz-creator' element={<Quizes/>}/>
       <Route path='/auth' element={<Auth/>}/>
       <Route exact path='/quiz/:id'  element={<Quiz/>}/>
       <Route path="*" element={<Navigate to="/" />}/>
