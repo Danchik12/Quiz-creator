@@ -12,10 +12,7 @@ class Drawer extends Component{
 		if (!this.props.isOpen){
 			cls.push('close')
 		}
-		const links = [<li><NavLink to="/" onClick={this.props.onClose}>Тесты</NavLink></li>,
-
-
-		]
+		const links = [<li><NavLink to="/" onClick={this.props.onClose}>Тесты</NavLink></li>]
 		if (this.props.isAuth){
 			links.push(<li><NavLink to="/create-quiz" onClick={this.props.onClose}>Создать тест</NavLink></li>)
 			links.push(<li><NavLink to="/logout" onClick={this.props.onClose}>Выйти</NavLink></li>)

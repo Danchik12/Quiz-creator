@@ -15,7 +15,7 @@ import {finishQuiz} from './../../../store/action/quiz'
       function countdownTimer() {
         const diff = deadline - new Date();
         if (diff <= 0) {
-         finish()
+          finish()
           clearInterval(timerId);
 
 
@@ -37,7 +37,8 @@ import {finishQuiz} from './../../../store/action/quiz'
   }
 
   componentDidMount (){
-    //передаем функцию при конце и время таймера в миллисекундах
+    //передаем функцию вызывающийся при окончании таймера 
+    // время таймера в миллисекундах
     this.GetTimer(this.props.finishQuiz,this.props.deadtime)
   }
    
