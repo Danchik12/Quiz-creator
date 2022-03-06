@@ -5,10 +5,10 @@ import {finishQuiz} from './../../../store/action/quiz'
  class Timer extends Component {
 
 
-   GetTimer (finish){
+   GetTimer (finish,deadtime){
     
-    // на сколько таймер в миллисекундах
-      const deadline = new Date(Date.now() + 420000);
+    // на сколько таймер ставить  в миллисекундах
+      const deadline = new Date(Date.now() + deadtime);
       // id таймера
       let timerId = null;
           // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
@@ -37,7 +37,8 @@ import {finishQuiz} from './../../../store/action/quiz'
   }
 
   componentDidMount (){
-    this.GetTimer(this.props.finishQuiz)
+    //передаем функцию при конце и время таймера в миллисекундах
+    this.GetTimer(this.props.finishQuiz,this.props.deadtime)
   }
    
 
