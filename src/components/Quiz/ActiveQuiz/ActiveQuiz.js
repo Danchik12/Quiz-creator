@@ -12,8 +12,7 @@ const ActiveQuiz = props => {
 <div className='Question'>
 <strong >Задания: {props.AnswerNumber}|{props.quizLength} </strong>
 <Timer
-minutes='7'
-seconds='0'
+
 
 />
 </div>

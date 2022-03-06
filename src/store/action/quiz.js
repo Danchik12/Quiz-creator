@@ -7,6 +7,7 @@ import {FETCH_QUIZES_START,
 			FINISH_QUIZ,
 			QUIZ_NEXT,
 			RETRY_QUIZ,
+			
 			} from './actionTypes'
 export  function fetchQuizes(){
 	return async dispatch => {
@@ -139,6 +140,11 @@ export function RetryQuiz(){
 		type:RETRY_QUIZ
 	}
 }
+
+
+
+
+
 
 
 

@@ -6,6 +6,7 @@ import {FETCH_QUIZES_START,
 		   FINISH_QUIZ,
 			QUIZ_NEXT,
 			RETRY_QUIZ,
+		
 		} from './../action/actionTypes'
 
 const inintialState  ={ 
@@ -18,7 +19,7 @@ isFinished:false,
 activeQuestion:0,
 answerState:null,
 quizName:" ",
-quiz:null
+quiz:null,
 
 }
 
@@ -67,9 +68,12 @@ export default function quizReducer(state = inintialState ,action){
   answerState:null,
   isFinished:false,
   results:0,
+  minutes:0,
+	seconds:5
   
 			}
 		}
+	
 
 		default:
 		return state

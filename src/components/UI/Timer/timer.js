@@ -1,50 +1,45 @@
  import React ,{Component} from 'react'
  import './timer.css'
-
-
+import {connect } from 'react-redux'
+import {finishQuiz} from './../../../store/action/quiz'
  class Timer extends Component {
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            seconds: this.props.seconds,
-            minutes: this.props.minutes
-            
+   GetTimer (finish){
+    
+    // на сколько таймер в миллисекундах
+      const deadline = new Date(Date.now() + 420000);
+      // id таймера
+      let timerId = null;
+          // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+      function countdownTimer() {
+        const diff = deadline - new Date();
+        if (diff <= 0) {
+         finish()
+          clearInterval(timerId);
+
+
         }
+        const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+        const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+        $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+        $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+      
+      }
+      // получаем элементы, содержащие компоненты даты
+      const $minutes = document.querySelector('#minutes');
+      const $seconds = document.querySelector('#seconds');
+      // вызываем функцию countdownTimer
+      countdownTimer();
+      // вызываем функцию countdownTimer каждую секунду
+      timerId = setInterval(countdownTimer, 1000);
+       
+  }
 
-        this.getTime = this.getTime.bind(this);
-    }    
-
-    getTime() {
-        let second = this.state.seconds
-        let minute = this.state.minutes;
-         
-        if (this.state.seconds == 0 ) {
-        minute -= 1;
-        second = 59
-    }
-
-
-    if (this.state.minutes == 0 && this.state.seconds == 0){
-        
-        
-
-    }
-        
-
-        this.setState({
-            seconds: second -=1,
-            minutes: minute,
-            
-        })
-    }
-
-    componentDidMount() {
-
-        this.timer = setInterval(this.getTime, 1000)
-
-    }
+  componentDidMount (){
+    this.GetTimer(this.props.finishQuiz)
+  }
+   
 
     render() {
         return (
@@ -52,7 +47,7 @@
             
                 
       <div className='Timer'>
-      {this.state.minutes}:{this.state.seconds % 60}
+      <span id='minutes'></span >:<span id='seconds'></span>
       </div>                
             
             </>
@@ -60,5 +55,12 @@
     }
 }
 
+function mapDispathToProps(dispatch){
+  return{
+    finishQuiz:() => dispatch(finishQuiz())
+  }
+}
 
-export default Timer
+
+
+export default  connect(null,mapDispathToProps)(Timer)
