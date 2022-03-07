@@ -1,5 +1,5 @@
 import React,{Component}  from 'react'
-import Layout from "./components/Layot/Layout"
+import Sidebar from './components/Navigation/Sidebar'
 import {Route,Routes,Navigate,useParams} from 'react-router-dom'
 import Quiz from "./components/Quiz/Quiz"
 import Auth from "./components/Auth/Auth"
@@ -30,38 +30,40 @@ class  App extends Component {
   componentDidMount () {
     this.props.autoLogin()
   }
+
 render (){
-  let routes=(
-      <Routes>
-      <Route exact path='/Quiz-creator' element={<Quizes/>}/>
-      <Route path='/auth' element={<Auth/>}/>
-      <Route exact path='/quiz/:id'  element={<Quiz/>}/>
-      <Route path="*" element={<Navigate to="/" />}/>
-      </Routes>
-      )
-
-  if (this.props.isAuth ){
-     routes=(
-      <Routes>
-      <Route path='/logout' element={<Logout/>}/>
-        <Route exact path='/' element={<Quizes/>}/>
-        <Route exact path='/quiz/:id'  element={<Quiz/>}/>
-      <Route path='/create-quiz' element={<QuizCreator/>}/>
-      <Route path="*" element={<Navigate to="/" />} />
+  let routes=[]
     
-      </Routes>)
-  }
+      
+if (this.props.isAuth ){
+    routes.push(<Route exact path='/quiz/:id'  element={<Quiz/>}/>)
+     routes.push(<Route path="*" element={<Navigate to="/Quiz-creator" />}/>)
+    routes.push(<Route path='/create-quiz' element={<QuizCreator/>}/>)
+     routes.push(<Route path='/logout' element={<Logout/>}/>)
+    routes.push(<Route exact path='/Quiz-creator' element={<Quizes/>}/>)
+     } else{
+       routes.push(<Route path="*" element={<Navigate to="/Quiz-creator" />}/>)
+       routes.push(<Route exact path='/Quiz-creator' element={<Quizes/>}/>)
+       routes.push(<Route path='/auth' element={<Auth/>}/>)
+        routes.push(<Route exact path='/quiz/:id'  element={<Quiz/>}/>)
+     }
+        
   return (
-    <Layout>
-
-      
-      {routes}
-      
-</Layout>
+    <>
+     
+<Sidebar isAuth={this.props.isAuth}/>
+<div className='container d-flex' style={{flexDirection:'column',flexGrow:"1"}}  >
+<Routes>
+       {routes}
+    
+      </Routes>
+      </div>
+</>
   )
 }
-
 }
+
+
 
 
 function mapStateToProps(state){
@@ -75,4 +77,6 @@ function mapDispatchToProps(dispatch){
     autoLogin: () => dispatch(autoLogin())
   }
 }
+
+
 export default withRouter(connect(mapStateToProps,mapDispatchToProps) (App))

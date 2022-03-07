@@ -1,5 +1,5 @@
  import React ,{Component} from 'react'
- import './timer.css'
+
 import {connect } from 'react-redux'
 import {finishQuiz} from './../../../store/action/quiz'
  class Timer extends Component {
@@ -48,7 +48,7 @@ import {finishQuiz} from './../../../store/action/quiz'
         <>
             
                 
-      <div className='Timer'>
+      <div style={{border:" 2px solid #fff",width:'60px',height:"40px",borderRadius: "60px",textAlign:'center'  }}>
       <span id='minutes'></span >:<span id='seconds'></span>
       </div>                
             

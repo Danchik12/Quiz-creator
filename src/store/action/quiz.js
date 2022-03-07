@@ -109,9 +109,9 @@ const question=state.quiz[state.activeQuestion]
 const results=state.results
 if (question.rightAnswerId === answerId){
 
-dispatch(quizSetState({[answerId]:'sucess'},results+1))
+dispatch(quizSetState({[answerId]:'success'},results+1))
 }else {
- dispatch(quizSetState({[answerId]:'error'},results))
+ dispatch(quizSetState({[answerId]:'danger'},results))
 }
 
 const timeout=window.setTimeout(() => {

@@ -1,4 +1,4 @@
-import './Quizes.css'
+
 import React,{Component} from 'react'
 import QuizCard from './QuizCard/QuizCard'
 import Loader from './../UI/Loader/Loader'
@@ -20,17 +20,17 @@ componentDidMount(){
 	render(){
 		return(
 
-<div className="QuizList">
+<div className="container">
 
 <div>
 <h1>Тесты</h1>
 {this.props.loading  && this.props.quizes.length !== 0 ?
 <Loader /> :
 
-<ul>
+<ul >
 {this.renderQuizes()}
-
 </ul>
+
 
 }
 

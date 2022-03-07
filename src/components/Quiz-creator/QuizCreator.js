@@ -1,8 +1,6 @@
-import './QuizCreator.css'
 import React,{Component} from 'react'
+import Form from 'react-bootstrap/Form'
 
-import Button from './../UI/Button/Button';
-import Select from './../UI/Select/Select';
 import {connect } from 'react-redux'
 import {createQuiz,addQuizQuestion} from './../../store/action/create'
  class QuizCreator extends Component{
@@ -16,10 +14,7 @@ import {createQuiz,addQuizQuestion} from './../../store/action/create'
 
 	}
 	
-	submitHandler=event =>{
-		event.preventDefault()
 
-	}
 	addQuestion =event =>{
 		event.preventDefault()
 		
@@ -65,63 +60,59 @@ document.getElementById('QuizName').value=''
 
 	render(){
 		return(
-<div className='QuizCreator'>
-<div className='CreateForm'>
+<div className="container d-flex justify-content-center ">
+<div style={{width:"600px"}}>
 <h1>Создание теста</h1>
-<form  onSubmit={this.submitHandler}>
+<Form>
+<Form.Group >
+<Form.Label>Название теста
+</Form.Label >
+<Form.Control type='text' id='QuizName' placeholder='Название теста'  />
+</Form.Group>
+<Form.Group >
+<Form.Label>Название вопроса
+</Form.Label>
+<Form.Control id='question' type="text" placeholder='Название вопроса'  />
+</Form.Group>
+<Form.Group >
+<Form.Label>Варианты ответов
+</Form.Label>
+<Form.Control  style={{margin:"4px"}} id='1' type="text" placeholder="Вариант ответа 1"  />
+<Form.Control style={{margin:"4px"}} id='2' type="text" placeholder="Вариант ответа 2"  />
+<Form.Control style={{margin:"4px"}} id='3' type="text" placeholder="Вариант ответа 3"  />
+<Form.Control style={{margin:"4px"}} id='4' type="text" placeholder="Вариант ответа 4"  />
+</Form.Group>
+<Form.Select  id="quiz" defaultValue="Выберите правильный ответ"
+onChange={this.SelectChange} >
+  <option>Выберите правильный ответ</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</Form.Select>
 
 
-<label  htmlFor='QuizName'>Название теста</label>
-<input id='QuizName' type="text" />
-<label  htmlFor='question'>Название Вопроса</label>
-<input id='question' type="text" />
-
-
-
-<label  htmlFor='1'>Варианты ответов</label>
-<input id='1' type="text" />
-<input id='2' type="text"/>
-<input id='3' type="text" />
-<input id='4' type="text" />
+</Form>
 
 
 
 
 
+<div className="d-grid gap-2 d-md-block"  >
+<button type='button' style={{margin:"10px"}} className='btn btn-primary'onClick={this.addQuestion}>Добавить вопрос</button>
 
-
-<Select
-label="Выберите правильный ответ"
-value={this.state.rightAnswerId}
-onChange={this.SelectChange}
-options={[
-	{text:1,value:1},
-	{text:2,value:2},
-	{text:3,value:3},
-	{text:4,value:4}
-	]}
-/>
-
-<Button
-type='primary'
-onClick={this.addQuestion}
-
-
->Добавить вопрос</Button>
-
-<Button
-type='sucess'
-onClick={this.CreateQuiz}
+<button type='button' onClick={this.CreateQuiz}
 disabled={this.props.quiz.length === 0}
-
->Создать тест</Button>
-
-
-
+className='btn btn-success'
+>Создать тест</button>
+</div>
 
 
 
-</form>
+
+
+
+
 
 
 </div>

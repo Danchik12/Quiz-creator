@@ -1,12 +1,12 @@
-import './Auth.css'
+
 import React,{Component} from 'react'
 import {connect } from 'react-redux'
-import {GoEyeClosed,GoEye} from "react-icons/go"
-import Button from './../UI/Button/Button';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import {auth} from './../../store/action/auth'
  class Auth extends Component{
 	state ={
-		close:false,
+	
 		check:true
 	}
 loginHandler=  ()=>{
@@ -25,27 +25,9 @@ false
 	)
 }
 
-submitHand =event =>{
-event.preventDefault()
-}
 
- show_hide_password =() =>{
-	var input = document.getElementById('password-input');
-	if (input.getAttribute('type') == 'password') {
-		
-		input.setAttribute('type', 'text');
-		this.setState({
-			close:!this.state.close
-		})
-	} else {
-		
-		input.setAttribute('type', 'password');
-		this.setState({
-			close:false
-		})
-	}
-	return false;
-}
+
+
 
 CheckOut =() =>{
 	this.setState({
@@ -60,28 +42,27 @@ render (){
 <div id='login'>
 <h1>Вход</h1>
 <hr/>
+<Form>
+  <Form.Group className="mb-3" >
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" id='email' placeholder="Enter email" required />
+    <Form.Text className="text-light">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
 
-			<p>
-     <label  htmlFor="email">Email</label>
-      <input  type='email' id='email' required/>
-      </p>
-      
-      
-      <label  htmlFor="password-input">Password</label>
-      <div className='pass'>
-			<input  type="password" id='password-input' required />
-      
-       { this.state.close ? 
-      	<GoEye className='control' onClick={this.show_hide_password }/>: 
-      	<GoEyeClosed className='control' onClick={this.show_hide_password }/> }
-
-       
-      
-      </div>
-      <Button type="sucess" onClick={this.loginHandler}>Войти</Button>
-
-      <p >
-                    Не зарегистрированы еще ?
+  <Form.Group className="mb-3" >
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" id='password-input' placeholder="Password" required/>
+  </Form.Group>
+ 
+  <Button variant="outline-success"  onClick={this.loginHandler}>
+    Войти
+  </Button>
+</Form>
+ 
+ <p >
+Не зарегистрированы еще ? &nbsp;
                     <a href="#login" onClick={this.CheckOut} >Присоединяйтесь</a>
                 </p>
 
@@ -96,29 +77,28 @@ const register =(
 <div id='register'>
                 <h1>Регистрация</h1>
 								<hr/>
-								<p>
-     <label  htmlFor="email">Email</label>
-      <input  type='email' id='email' required/>
-      </p>
-      
-      
-      <label  htmlFor="password-input">Password</label>
-      <div className='pass'>
-			<input  type="password" id='password-input' required />
-      
-       { this.state.close ? 
-      	<GoEye className='control' onClick={this.show_hide_password }/>: 
-      	<GoEyeClosed className='control' onClick={this.show_hide_password }/> }
+								<Form>
+  <Form.Group className="mb-3" >
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" id='email' placeholder="Enter email" required />
+    <Form.Text className="text-light">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
 
-       
-      
-      </div>
-
-								<Button type="primary" onClick={this.registerHandler}>Зарегестрироваться</Button>
-								<p >  
-                 Уже зарегистрированы ?
-                 <a href="#register" onClick={this.CheckOut} > Войдите на сайт </a>
-                 </p>
+  <Form.Group className="mb-3" >
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" id='password-input' placeholder="Password" required/>
+  </Form.Group>
+ 
+  <Button variant="outline-info"  onClick={this.registerHandler}>
+    Зарегестрироваться
+  </Button>
+</Form>
+<p >  
+Уже зарегистрированы ? &nbsp;
+<a href="#register" onClick={this.CheckOut} > Войдите на сайт </a>
+    </p>
 
 
                 </div>
@@ -128,15 +108,16 @@ const register =(
 
 
 		return(
-<div className="Auth">
+<div className="d-flex justify-content-center ">
 <div>
-<form onSubmit={this.submitHand} className="AuthForm">
+
+
 {this.state.check ?
 login :
 register}
 
                 
-    </form>
+    
 </div>
 
 

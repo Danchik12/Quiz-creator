@@ -1,15 +1,12 @@
 import React from 'react'
-import './Loader.css'
+
 
 
 function Loader(){
 	return(
-		<div className="lds-facebook">
-		<div/>
-		<div/>
-		<div/>
-		</div>
-
+		<div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
 
 		)
 	}

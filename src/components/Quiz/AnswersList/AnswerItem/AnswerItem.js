@@ -1,14 +1,14 @@
 import React from 'react'
-import './AnswerItem.css'
 
 
 const AnswerItem =props => {
-	const cls =['AnswerItem']
+	const cls =["m-2" ]
 	if (props.state){
-		cls.push([props.state])
+		
+		cls.push('border-'+[props.state])
 	}
 return (
-<li className={cls.join(' ')}
+<li className={cls.join(' ')} style={{border:"2px solid #FFF",borderRadius:"10px",cursor:"pointer" ,}}
 onClick={() => props.onAnswerClick(props.answer.id)}
 > 
 {props.answer.text}

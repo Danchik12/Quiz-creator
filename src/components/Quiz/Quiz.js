@@ -1,5 +1,5 @@
 import React,{Component}  from 'react'
-import './Quiz.css'
+
 import ActiveQuiz from './ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from './FinishedQuiz/FinishedQuiz'
 import Loader from './../UI/Loader/Loader'
@@ -36,10 +36,10 @@ componentWillUnmount(){
 
 render() {
   return(
-<div className="Quiz">
+<div  className='d-flex ' style={{justifyContent:'center',paddingTop: '100',flexGrow:"1",width: '100%' }}  >
 
 
-<div className='QuizWrapper'>
+<div className='container' style={{width:"600px"}}>
 <h1>{this.props.quizName}</h1>
 {this.props.loading || !this.props.quiz 
 ? <Loader /> :  

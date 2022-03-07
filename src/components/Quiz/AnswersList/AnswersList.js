@@ -1,10 +1,10 @@
 import React from 'react'
-import "./AnswersList.css"
+
 import AnswerItem from './AnswerItem/AnswerItem'
 
 const AnswersList = props => {
 return (
-<ul className="AnswersList">
+<ul style={{listStyle:"none",margin:"0",padding:"0"}}>
 {props.answers.map((answer,index) =>{
 return (<AnswerItem  
 key={index} 

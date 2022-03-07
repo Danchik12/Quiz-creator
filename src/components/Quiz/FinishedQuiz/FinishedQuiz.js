@@ -1,18 +1,18 @@
 import React from "react"
-import "./FinishedQuiz.css"
+
 import {Link} from 'react-router-dom'
-import Button from './../../UI/Button/Button'
+
 
 const FinishedQuiz = props => {
 	
 	return (
-<div className="FinishedQuiz	">
+<div className="container" style={{border:"2px solid #fff",borderRadius:'5px',padding:"20px"}}>
 <p>Правильно {props.results} из {props.quizLength}</p>
 
-<div>
-<Button onClick={props.onRetry } type='primary'>Повторить</Button>
-<Link to='/' >
-<Button  type='sucess'>Перейти в список тестов</Button>
+<div className="d-flex ">
+<button type='button' className='btn btn-primary' onClick={props.onRetry } >Повторить</button>
+<Link to='/Quiz-creator' >
+<button type='button' className='btn btn-outline-success ms-3' >Перейти в список тестов</button>
 </Link>
 </div>
 
