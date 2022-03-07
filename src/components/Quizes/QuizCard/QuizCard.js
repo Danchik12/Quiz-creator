@@ -6,7 +6,8 @@ export default function QuizCard ({quizName,id}) {
 	
 		return(
 
-<Link  className ='link-dark text-decoration-none' to={'/quiz/'+id} ><Card className='m-3 '>
+<Link  className ='link-dark text-decoration-none' to={'/quiz/'+id} >
+<Card className='m-3 '>
 <Card.Body  >
 Тест: {quizName}
 
