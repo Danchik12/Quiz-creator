@@ -6,6 +6,7 @@ import {FETCH_QUIZES_START,
 		   FINISH_QUIZ,
 			QUIZ_NEXT,
 			RETRY_QUIZ,
+			LIKE_ADD
 		
 		} from './../action/actionTypes'
 
@@ -20,6 +21,7 @@ activeQuestion:0,
 answerState:null,
 quizName:" ",
 quiz:null,
+likes:" "
 
 }
 
@@ -40,7 +42,7 @@ export default function quizReducer(state = inintialState ,action){
 		case FETCH_QUIZ_SUCCESS:{
 			return {
 				...state,loading:false,quiz:action.quiz,
-				quizName:action.quizName
+				quizName:action.quizName,likes:action.likes
 			}
 		}
 		case QUIZ_SET_STATE:{
@@ -68,9 +70,16 @@ export default function quizReducer(state = inintialState ,action){
   answerState:null,
   isFinished:false,
   results:0,
-  minutes:0,
-	seconds:5
   
+ 
+
+  
+			}
+
+		}
+		case LIKE_ADD:{
+			return {
+				...state,likes:action.likes
 			}
 		}
 	
