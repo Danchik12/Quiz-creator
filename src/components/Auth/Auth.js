@@ -4,6 +4,7 @@ import {connect } from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {auth} from './../../store/action/auth'
+
  class Auth extends Component{
 	state ={
 	
@@ -19,6 +20,7 @@ true
 
 registerHandler =  ()=>{
 this.props.auth(
+    
 		document.getElementById('email').value,
 	document.getElementById('password-input').value,
 false
@@ -51,6 +53,7 @@ render (){
     </Form.Text>
   </Form.Group>
 
+
   <Form.Group className="mb-3" >
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" id='password-input' placeholder="Password" required/>
@@ -78,6 +81,7 @@ const register =(
                 <h1>Регистрация</h1>
 								<hr/>
 								<Form>
+                   
   <Form.Group className="mb-3" >
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" id='email' placeholder="Enter email" required />
@@ -85,6 +89,7 @@ const register =(
       We'll never share your email with anyone else.
     </Form.Text>
   </Form.Group>
+
 
   <Form.Group className="mb-3" >
     <Form.Label>Password</Form.Label>
