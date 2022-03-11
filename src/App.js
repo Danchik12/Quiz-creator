@@ -36,7 +36,7 @@ render (){
     
       
 if (this.props.isAuth ){
-    routes.push(<Route exact path='/quiz/:id'  element={<Quiz/>}/>)
+    routes.push(<Route exact path='/quiz/:id'  element={<Quiz isAuth={this.props.isAuth} />}/> )
      routes.push(<Route path="*" element={<Navigate to="/Quiz-creator" />}/>)
     routes.push(<Route path='/create-quiz' element={<QuizCreator/>}/>)
      routes.push(<Route path='/logout' element={<Logout/>}/>)
@@ -45,7 +45,7 @@ if (this.props.isAuth ){
        routes.push(<Route path="*" element={<Navigate to="/Quiz-creator" />}/>)
        routes.push(<Route exact path='/Quiz-creator' element={<Quizes/>}/>)
        routes.push(<Route path='/auth' element={<Auth/>}/>)
-        routes.push(<Route exact path='/quiz/:id'  element={<Quiz/>}/>)
+        routes.push(<Route exact path='/quiz/:id' element={<Quiz isAuth={this.props.isAuth} />} />)
      }
         
   return (

@@ -6,6 +6,7 @@ import Loader from './../UI/Loader/Loader'
 import {useParams} from "react-router-dom";
 import {connect } from 'react-redux'
 import {fetchQuizByID,quizAnswerClick,RetryQuiz,AddLike} from './../../store/action/quiz'
+import Alert from 'react-bootstrap/Alert';
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     
@@ -20,13 +21,31 @@ function withRouter(Component) {
 
   return ComponentWithRouterProp;
 }
+
+
 class Quiz extends Component {
+state=
+{
+  show:false
+}
+  
+  
+
+
+
+
+
+
+  
+
+
 
  
 
 
  
 componentDidMount (){
+
   this.props.fetchQuizByID(this.props.router.params.id)
 }
 
@@ -64,10 +83,35 @@ state={this.props.answerState}
 }
 
 <p className='m-2 ' >
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" onClick={() => {this.props.AddLike(this.props.router.params.id)}} className="bi bi-heart-fill"
+
+   <Alert variant="warning"  show={this.state.show}  onClose={() => this.setState({
+      show:false
+    })
+    } dismissible>
+        Доступно только пользователям сайта &nbsp;
+       <Alert.Link href="/auth">Войдите</Alert.Link>
+      </Alert>
+   
+{this.props.isAuth 
+  ?
+  <svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24" fill="currentColor" style={{cursor:"pointer"}} 
+onClick={() => {this.props.AddLike(this.props.router.params.id)}} className="bi bi-heart-fill"
    viewBox="0 0 16 16">
 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 </svg>
+:
+<svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24" fill="currentColor" 
+style={{cursor:"pointer"}} 
+onClick={() => {this.setState({
+      show:true
+    })}} className="bi bi-heart-fill"
+   viewBox="0 0 16 16">
+<path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+</svg>
+
+
+}
+
   &nbsp; {String(this.props.likes)}</p>
 
 </div>
@@ -99,7 +143,8 @@ function mapDispathToProps(dispatch){
     fetchQuizByID:id => dispatch(fetchQuizByID(id)),
     quizAnswerClick:answerId =>dispatch(quizAnswerClick(answerId)),
     RetryQuiz:() => dispatch (RetryQuiz()),
-    AddLike:id => dispatch(AddLike(id))
+    AddLike:(id) => dispatch (AddLike(id))
+   
   }
 }
 

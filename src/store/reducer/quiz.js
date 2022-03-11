@@ -6,7 +6,8 @@ import {FETCH_QUIZES_START,
 		   FINISH_QUIZ,
 			QUIZ_NEXT,
 			RETRY_QUIZ,
-			LIKE_ADD
+			ADD_LIKE
+		
 		
 		} from './../action/actionTypes'
 
@@ -21,7 +22,9 @@ activeQuestion:0,
 answerState:null,
 quizName:" ",
 quiz:null,
-likes:" "
+likes:' '
+
+
 
 }
 
@@ -77,11 +80,12 @@ export default function quizReducer(state = inintialState ,action){
 			}
 
 		}
-		case LIKE_ADD:{
+		case ADD_LIKE:{
 			return {
 				...state,likes:action.likes
 			}
 		}
+		
 	
 
 		default:

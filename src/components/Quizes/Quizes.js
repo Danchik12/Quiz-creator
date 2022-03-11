@@ -1,8 +1,8 @@
-
 import React,{Component} from 'react'
 import QuizCard from './QuizCard/QuizCard'
 import Loader from './../UI/Loader/Loader'
 import {connect } from 'react-redux'
+
 import {fetchQuizes} from './../../store/action/quiz'
  class Quizes extends Component{
 renderQuizes(){

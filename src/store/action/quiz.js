@@ -7,7 +7,8 @@ import {FETCH_QUIZES_START,
 			FINISH_QUIZ,
 			QUIZ_NEXT,
 			RETRY_QUIZ,
-			LIKE_ADD
+			ADD_LIKE,
+			
 			
 			} from './actionTypes'
 
@@ -143,26 +144,26 @@ export function RetryQuiz(){
 		type:RETRY_QUIZ
 	}
 }
+ 
 
-
-export function AddLike(quizId){
-	return  async (dispatch , getState) => {
-		
-		
+ export function AddLike(quizId){
+return  async (dispatch,getState) => {
 		const state=getState().quiz
-	
-		dispatch(like(Number(state.likes)+1))
+  
+     document.getElementById('like').setAttribute('fill','red')
+    let likes=(Number(state.likes)+1)
+  dispatch(Like(likes))
+await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
 
-		await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:String(Number(state.likes)+1)} )
-	}
+
+}
+  
 }
 
-
-export function like(likes){
+export function Like(likes) {
 	return {
-		type:LIKE_ADD,
+		type:ADD_LIKE,
 		likes
 	}
+
 }
-
-
