@@ -19,6 +19,7 @@ export  function fetchQuizes(){
  	const response = await axios.get('https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes.json')
  	const quizes=[]
  	
+ 	
 
  for (const [key,value] of Object.entries(response.data)) {
  		
@@ -66,12 +67,18 @@ export function fetchQuizByID(quizId) {
 		dispatch(fetchQuizesStart())
 
 		 try{
-
-  const response = await axios.get(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`)
-
+	
+	
+	
+	const response = await axios.get(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`)
+ 
   const quiz=response.data.quiz
   const quizName=response.data.quizName 
-  let likes =response.data.likes
+  const likes =response.data.likes
+  let  token = localStorage.getItem('userId')
+	if (token != null){
+await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`,{liked:false})
+}
 
  dispatch(fetchQuizSuccess(quiz,quizName,likes))
 }catch(e){
@@ -151,21 +158,24 @@ export function RetryQuiz(){
  export function AddLike(quizId){
 return  async (dispatch,getState) => {
 		const state=getState().quiz
-		const token = localStorage.getItem('token')
-		
-		const isLike = localStorage.getItem(quizId)
+		const token = localStorage.getItem('userId')
+		const response = await axios.get(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`)
+		const isLike = response.data.liked
 		if(!isLike){
 		document.getElementById('like').setAttribute('fill','red')
     let likes=(Number(state.likes)+1)
   dispatch(Like(likes))
-localStorage.setItem(quizId,token)
-await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+  axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`,{liked:true})
+  axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+ 
+
 }else {
 document.getElementById('like').setAttribute('fill','currentColor')
     let likes=(Number(state.likes)-1)
   dispatch(Like(likes))
-localStorage.removeItem(quizId)
-await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+  axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`,{liked:false})
+ axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+
 
 }
 
