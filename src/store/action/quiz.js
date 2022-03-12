@@ -72,9 +72,8 @@ export function fetchQuizByID(quizId) {
   const quiz=response.data.quiz
   const quizName=response.data.quizName 
   let likes =response.data.likes
-  let isLike=response.data.isLike
-  let color =response.data.color
- dispatch(fetchQuizSuccess(quiz,quizName,likes,isLike,color))
+
+ dispatch(fetchQuizSuccess(quiz,quizName,likes))
 }catch(e){
   dispatch(fetchQuizesError(e))
 }
@@ -83,10 +82,10 @@ export function fetchQuizByID(quizId) {
 }
 
 
-export function fetchQuizSuccess(quiz,quizName,likes,isLike,color){
+export function fetchQuizSuccess(quiz,quizName,likes){
 	return {
 		type:FETCH_QUIZ_SUCCESS,
-		quiz,quizName,likes,isLike,color
+		quiz,quizName,likes
 	}
 } 
 
@@ -149,36 +148,38 @@ export function RetryQuiz(){
 }
  
 
- export function AddLike(quizId,isLike){
+ export function AddLike(quizId){
 return  async (dispatch,getState) => {
 		const state=getState().quiz
+		const token = localStorage.getItem('token')
+		
+		const isLike = localStorage.getItem(quizId)
 		if(!isLike){
-	
+		document.getElementById('like').setAttribute('fill','red')
     let likes=(Number(state.likes)+1)
-  dispatch(Like(likes,true,'red'))
-  await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{color:'red'})
+  dispatch(Like(likes))
+localStorage.setItem(quizId,token)
 await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
-await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{isLike:true})     
-}
-else{
-	 	
-
+}else {
+document.getElementById('like').setAttribute('fill','currentColor')
     let likes=(Number(state.likes)-1)
-  dispatch(Like(likes,false,'currentColor'))
-  await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{color:'currentColor'})
+  dispatch(Like(likes))
+localStorage.removeItem(quizId)
 await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
-await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{isLike:false}) 
 
 }
+
+
+
 
 }
   
 }
 
-export function Like(likes,isLike,color) {
+export function Like(likes) {
 	return {
 		type:ADD_LIKE,
-		likes,isLike,color
+		likes
 	}
 
 }

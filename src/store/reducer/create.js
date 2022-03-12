@@ -3,8 +3,7 @@ const initialState = {
 	quiz : [],
 	quizName:'',
 	likes:"0",
-	isLike:false,
-	color:"currentColor"
+
 }
 
 
