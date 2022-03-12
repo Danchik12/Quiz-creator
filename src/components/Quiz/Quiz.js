@@ -1,5 +1,4 @@
 import React,{Component}  from 'react'
-
 import ActiveQuiz from './ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from './FinishedQuiz/FinishedQuiz'
 import Loader from './../UI/Loader/Loader'
@@ -40,7 +39,6 @@ state={
 
 
   
-
 
  
 
