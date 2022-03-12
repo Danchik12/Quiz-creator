@@ -24,9 +24,9 @@ function withRouter(Component) {
 
 
 class Quiz extends Component {
-state=
-{
+state={
   show:false
+  
 }
   
   
@@ -34,6 +34,8 @@ state=
 
 
 
+
+   
 
 
   
@@ -54,8 +56,10 @@ componentWillUnmount(){
 }
 
 render() {
-  
+
+
   return(
+
 <div  className='d-flex ' style={{justifyContent:'center',paddingTop: '100',flexGrow:"1",width: '100%' }}  >
 
 
@@ -91,16 +95,22 @@ state={this.props.answerState}
         Доступно только пользователям сайта &nbsp;
        <Alert.Link href="/auth">Войдите</Alert.Link>
       </Alert>
+
    
 {this.props.isAuth 
   ?
-  <svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24" fill="currentColor" style={{cursor:"pointer"}} 
-onClick={() => {this.props.AddLike(this.props.router.params.id)}} className="bi bi-heart-fill"
+  <svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24"
+   fill={this.props.color}
+    
+     style={{cursor:"pointer"}} 
+  
+    
+onClick={() => {this.props.AddLike(this.props.router.params.id,this.props.isLike)}} className="bi bi-heart-fill"
    viewBox="0 0 16 16">
 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 </svg>
 :
-<svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24" fill="currentColor" 
+<svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24" fill={this.props.color} 
 style={{cursor:"pointer"}} 
 onClick={() => {this.setState({
       show:true
@@ -126,6 +136,8 @@ onClick={() => {this.setState({
 
 function mapStateToProps(state){
   return {
+color:state.quiz.color,
+isLike:state.quiz.isLike,
 likes:state.quiz.likes,
 results:state.quiz.results,
 isFinished:state.quiz.isFinished,
@@ -143,7 +155,7 @@ function mapDispathToProps(dispatch){
     fetchQuizByID:id => dispatch(fetchQuizByID(id)),
     quizAnswerClick:answerId =>dispatch(quizAnswerClick(answerId)),
     RetryQuiz:() => dispatch (RetryQuiz()),
-    AddLike:(id) => dispatch (AddLike(id))
+    AddLike:(id,isLike) => dispatch (AddLike(id,isLike))
    
   }
 }

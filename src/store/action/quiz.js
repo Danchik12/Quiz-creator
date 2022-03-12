@@ -24,7 +24,8 @@ export  function fetchQuizes(){
  		
  		quizes.push({
  			id:key,
- 		name:`${value.quizName}`
+ 		name:`${value.quizName}`,
+ 		likes:`${value.likes}`
  		})
  		
 
@@ -71,7 +72,9 @@ export function fetchQuizByID(quizId) {
   const quiz=response.data.quiz
   const quizName=response.data.quizName 
   let likes =response.data.likes
- dispatch(fetchQuizSuccess(quiz,quizName,likes))
+  let isLike=response.data.isLike
+  let color =response.data.color
+ dispatch(fetchQuizSuccess(quiz,quizName,likes,isLike,color))
 }catch(e){
   dispatch(fetchQuizesError(e))
 }
@@ -80,10 +83,10 @@ export function fetchQuizByID(quizId) {
 }
 
 
-export function fetchQuizSuccess(quiz,quizName,likes){
+export function fetchQuizSuccess(quiz,quizName,likes,isLike,color){
 	return {
 		type:FETCH_QUIZ_SUCCESS,
-		quiz,quizName,likes
+		quiz,quizName,likes,isLike,color
 	}
 } 
 
@@ -146,24 +149,36 @@ export function RetryQuiz(){
 }
  
 
- export function AddLike(quizId){
+ export function AddLike(quizId,isLike){
 return  async (dispatch,getState) => {
 		const state=getState().quiz
-  
-     document.getElementById('like').setAttribute('fill','red')
+		if(!isLike){
+	
     let likes=(Number(state.likes)+1)
-  dispatch(Like(likes))
+  dispatch(Like(likes,true,'red'))
+  await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{color:'red'})
 await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{isLike:true})     
+}
+else{
+	 	
 
+    let likes=(Number(state.likes)-1)
+  dispatch(Like(likes,false,'currentColor'))
+  await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{color:'currentColor'})
+await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{likes:likes})
+await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes/${quizId}.json`,{isLike:false}) 
+
+}
 
 }
   
 }
 
-export function Like(likes) {
+export function Like(likes,isLike,color) {
 	return {
 		type:ADD_LIKE,
-		likes
+		likes,isLike,color
 	}
 
 }

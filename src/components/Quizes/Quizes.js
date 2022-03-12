@@ -8,7 +8,8 @@ import {fetchQuizes} from './../../store/action/quiz'
 renderQuizes(){
 	return this.props.quizes.map((quiz,index) => {
 	return(
-	<QuizCard quizName={quiz.name} id={quiz.id}  key={index}/>
+		
+	<QuizCard quizName={quiz.name} id={quiz.id} likes={quiz.likes} key={index}/>
 	)
 })
 }

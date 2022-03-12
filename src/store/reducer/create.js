@@ -2,7 +2,9 @@ import {CREATE_QUESTION,RESET_QUIZ_CREATION} from './../action/actionTypes'
 const initialState = {
 	quiz : [],
 	quizName:'',
-	likes:"0"
+	likes:"0",
+	isLike:false,
+	color:"currentColor"
 }
 
 

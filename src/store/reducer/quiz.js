@@ -22,7 +22,10 @@ activeQuestion:0,
 answerState:null,
 quizName:" ",
 quiz:null,
-likes:' '
+likes:' ',
+isLike:false,
+color:'currentColor'
+
 
 
 
@@ -45,7 +48,7 @@ export default function quizReducer(state = inintialState ,action){
 		case FETCH_QUIZ_SUCCESS:{
 			return {
 				...state,loading:false,quiz:action.quiz,
-				quizName:action.quizName,likes:action.likes
+				quizName:action.quizName,likes:action.likes,isLike:action.isLike,color:action.color
 			}
 		}
 		case QUIZ_SET_STATE:{
@@ -82,7 +85,7 @@ export default function quizReducer(state = inintialState ,action){
 		}
 		case ADD_LIKE:{
 			return {
-				...state,likes:action.likes
+				...state,likes:action.likes,isLike:action.isLike,color:action.color
 			}
 		}
 		
