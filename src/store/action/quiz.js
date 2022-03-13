@@ -75,12 +75,27 @@ export function fetchQuizByID(quizId) {
   const quiz=response.data.quiz
   const quizName=response.data.quizName 
   const likes =response.data.likes
+  
   let  token = localStorage.getItem('userId')
 	if (token != null){
-await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`,{liked:false})
+		try{
+	const res =await axios.get(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`)
+	const isLike = res.data.liked
+dispatch(fetchQuizSuccess(quiz,quizName,likes,isLike))
+	
+
+}
+catch(e){
+  await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/${token}/${quizId}.json`,{liked:false})
+const isLike=false
+dispatch(fetchQuizSuccess(quiz,quizName,likes,isLike))
 }
 
- dispatch(fetchQuizSuccess(quiz,quizName,likes))
+}
+
+
+
+ 
 }catch(e){
   dispatch(fetchQuizesError(e))
 }
@@ -89,10 +104,10 @@ await axios.patch(`https://react-quiz-c7272-default-rtdb.firebaseio.com/quizId/$
 }
 
 
-export function fetchQuizSuccess(quiz,quizName,likes){
+export function fetchQuizSuccess(quiz,quizName,likes,isLike){
 	return {
 		type:FETCH_QUIZ_SUCCESS,
-		quiz,quizName,likes
+		quiz,quizName,likes,isLike
 	}
 } 
 

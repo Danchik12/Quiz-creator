@@ -55,8 +55,10 @@ componentWillUnmount(){
 }
 
 render() {
-  
-
+   let color='currentColor'
+   //eslint-disable-next-line
+{this.props.isLike ? color='red': color='currentColor'}  
+ 
 
 
 return(
@@ -86,7 +88,7 @@ state={this.props.answerState}
 
 />
 }
-
+<div>
 <p className='m-2 ' >
 
    <Alert variant="warning"  show={this.state.show}  onClose={() => this.setState({
@@ -101,7 +103,7 @@ state={this.props.answerState}
 {this.props.isAuth 
   ?
   <svg xmlns="http://www.w3.org/2000/svg" id='like' width="24" height="24"
- fill="currentColor" style={{cursor:"pointer"}} 
+ fill={color} style={{cursor:"pointer"}} 
 onClick={() => {this.props.AddLike(this.props.router.params.id)}} className="bi bi-heart-fill"
    viewBox="0 0 16 16">
 <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -120,7 +122,7 @@ onClick={() => {this.setState({
 }
 
   &nbsp; {String(this.props.likes)}</p>
-
+</div>
 </div>
 
 </div>
@@ -133,7 +135,7 @@ onClick={() => {this.setState({
 
 function mapStateToProps(state){
   return {
-
+isLike:state.quiz.isLike,
 likes:state.quiz.likes,
 results:state.quiz.results,
 isFinished:state.quiz.isFinished,

@@ -54,6 +54,7 @@ if (this.props.isAuth ){
 <Sidebar isAuth={this.props.isAuth}/>
 <div className='container d-flex' style={{flexDirection:'column',flexGrow:"1"}}  >
 <Routes>
+
        {routes}    
       </Routes>
       </div>

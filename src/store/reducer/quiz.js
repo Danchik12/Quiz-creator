@@ -22,7 +22,8 @@ activeQuestion:0,
 answerState:null,
 quizName:" ",
 quiz:null,
-likes:' '
+likes:' ',
+isLike:false
 
 
 
@@ -47,7 +48,7 @@ export default function quizReducer(state = inintialState ,action){
 		case FETCH_QUIZ_SUCCESS:{
 			return {
 				...state,loading:false,quiz:action.quiz,
-				quizName:action.quizName,likes:action.likes
+				quizName:action.quizName,likes:action.likes,isLike:action.isLike
 			}
 		}
 		case QUIZ_SET_STATE:{
