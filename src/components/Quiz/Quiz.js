@@ -68,7 +68,8 @@ return(
 
 <div className='container' style={{width:"600px"}}>
 <h1>{this.props.quizName}</h1>
-{this.props.loading || !this.props.quiz 
+{this.props.loading || ! this.props.quiz
+
 ? <Loader /> :  
 
   this.props.isFinished 
@@ -79,6 +80,8 @@ return(
 
    />
    : <ActiveQuiz 
+
+
 answers={this.props.quiz[this.props.activeQuestion].answers} 
 question={this.props.quiz[this.props.activeQuestion].question}
 onAnswerClick={this.props.quizAnswerClick}
@@ -87,6 +90,7 @@ AnswerNumber={this.props.activeQuestion+1}
 state={this.props.answerState}
 
 />
+
 }
 <div>
 <p className='m-2 ' >
