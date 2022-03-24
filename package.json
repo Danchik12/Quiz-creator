@@ -41,6 +41,7 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "minimist": "^1.2.6",
     "node-sass": "^7.0.1",
     "nth-check": "^2.0.1",
     "postcss": "^8.4.12",
