@@ -12,7 +12,7 @@
     "@svgr/webpack": "^6.2.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.0.0",
     "axios": "^0.26.1",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.4",
