@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AnswersList from './../AnswersList/AnswersList'
-import Timer from './../../UI/Timer/timer'
+
 
  
 const ActiveQuiz = props => {
@@ -12,11 +12,7 @@ const ActiveQuiz = props => {
 <div className='d-flex justify-content-between'style={{border:"1px solid #fff",padding:"10px",
 height:"60px",width:"90%",borderRadius:"15px"}} >
 <strong >Задания: {props.AnswerNumber}|{props.quizLength} </strong>
-<Timer
 
-deadtime={420000}
-
-/>
 </div>
 
 
