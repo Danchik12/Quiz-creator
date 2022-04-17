@@ -22,7 +22,7 @@ activeQuestion:0,
 answerState:null,
 quizName:" ",
 quiz:null,
-likes:' ',
+likes:0,
 isLike:false
 
 

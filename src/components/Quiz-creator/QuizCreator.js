@@ -5,7 +5,8 @@ import {connect } from 'react-redux'
 import {createQuiz,addQuizQuestion} from './../../store/action/create'
  class QuizCreator extends Component{
 	state ={
-		rightAnswerId:1
+		rightAnswerId:1,
+		IsImage:false,
 	}
 	SelectChange = event =>{
 		this.setState({
@@ -26,6 +27,7 @@ import {createQuiz,addQuizQuestion} from './../../store/action/create'
 			question:document.getElementById('question').value,
 			id:this.props.quiz.length+1,
 			rightAnswerId:this.state.rightAnswerId,
+			imageUrl:this.state.IsImage ? document.getElementById('imageUrl').value  :'',
 			answers:[
 			{text:document.getElementById('1').value,id:1},
 			{text:document.getElementById('2').value,id:2},
@@ -37,19 +39,21 @@ import {createQuiz,addQuizQuestion} from './../../store/action/create'
 				
 				
 				document.getElementById('question').value=''
+				document.getElementById('imageUrl').value=''
 				document.getElementById('1').value=''
 				document.getElementById('2').value=''
 				document.getElementById('3').value=''
 				document.getElementById('4').value=''
 	}
 
-
+	
 	
 	CreateQuiz =  event =>{
 event.preventDefault()
 
 this.props.createQuiz()
 document.getElementById('question').value=''
+document.getElementById('imageUrl').value=''
 				document.getElementById('1').value=''
 				document.getElementById('2').value=''
 				document.getElementById('3').value=''
@@ -74,7 +78,27 @@ document.getElementById('QuizName').value=''
 </Form.Label>
 <Form.Control id='question' type="text" placeholder='Название вопроса'  />
 </Form.Group>
+<Form.Group>
+  <Form.Switch 
+  	className='mt-2'
+    
+    id="image"
+    label="Есть изображение"
+    onClick={() => {this.setState({
+     IsImage:!this.state.IsImage
+    })}}
+  /> 
+ 
+  {this.state.IsImage
+  	?   <Form.Group>
+    
+    <Form.Control placeholder="Url изображения" id='imageUrl' />
+  </Form.Group>
+  : 
+  <span></span>
 
+  }
+   </Form.Group>
 <Form.Group >
 <Form.Label>Варианты ответов
 </Form.Label>

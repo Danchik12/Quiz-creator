@@ -84,6 +84,7 @@ return(
 
 answers={this.props.quiz[this.props.activeQuestion].answers} 
 question={this.props.quiz[this.props.activeQuestion].question}
+imageUrl={this.props.quiz[this.props.activeQuestion].imageUrl}
 onAnswerClick={this.props.quizAnswerClick}
 quizLength={this.props.quiz.length}
 AnswerNumber={this.props.activeQuestion+1}

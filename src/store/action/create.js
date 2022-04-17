@@ -16,7 +16,8 @@ export function createQuiz(){
 	return  async (dispatch,getState) =>{
 		const data ={
 			quizName:getState().create.quizName,
-			quiz:getState().create.quiz
+			quiz:getState().create.quiz,
+			likes:getState().create.likes
 		}
 		await axios.post('https://react-quiz-c7272-default-rtdb.firebaseio.com/quizes.json',data )
 		dispatch(resetQuiz())
