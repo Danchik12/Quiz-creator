@@ -74,6 +74,7 @@ document.getElementById('QuizName').value=''
 </Form.Label>
 <Form.Control id='question' type="text" placeholder='Название вопроса'  />
 </Form.Group>
+
 <Form.Group >
 <Form.Label>Варианты ответов
 </Form.Label>
