@@ -15,16 +15,16 @@ height:"60px",width:"90%",borderRadius:"15px"}} >
 
 </div>
 
+
+
+<div className="d-flex pt-2 " style={{marginBottom: '20px'}} >{props.question}</div>
 { props.imageUrl ?
-<div className='d-flex mt-3  '>
+<div className='d-flex  mb-4 '>
 <img src={props.imageUrl} style={{height:'300px',borderRadius:'10px',borderColor: 'white',borderStyle:'solid'}} alt={props.question}/>
 
 </div>
 : <span></span>
 }
-
-
-<div className="d-flex " style={{marginBottom: '30px'}} >{props.question}</div>
 
 <AnswersList
 state={props.state} 
