@@ -14,9 +14,10 @@ height:"60px",width:"90%",borderRadius:"15px"}} >
 <strong >Задания: {props.AnswerNumber}|{props.quizLength} </strong>
 
 </div>
+
 { props.imageUrl ?
-<div className='d-flex mt-3'>
-<img src={props.imageUrl} style={{width:'300px'}} alt={props.question}/>
+<div className='d-flex mt-3  '>
+<img src={props.imageUrl} style={{height:'300px',borderRadius:'10px',borderColor: 'white',borderStyle:'solid'}} alt={props.question}/>
 
 </div>
 : <span></span>
